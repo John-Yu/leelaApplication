@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">leelaApplication</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_start">Start</string>
+</resources>
