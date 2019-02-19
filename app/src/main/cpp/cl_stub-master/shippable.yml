@@ -1,0 +1,22 @@
+language: c
+
+branches:
+  only:
+    - master
+
+build:
+  ci:
+    - sudo apt install cmake
+    - pwd
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+
+integrations:
+  notifications:
+    - integrationName: email
+      type: email
+      on_success: change
+      on_failure: always
+      on_pull_request: never

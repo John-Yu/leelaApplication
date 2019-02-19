@@ -785,8 +785,10 @@ void OpenCL<net_t>::initialize(const int channels) {
     }
 
     auto t = Tuner<net_t>(*this, m_context, m_device);
-    auto sgemm_tuners =
-        t.load_sgemm_tuners(channels, WINOGRAD_P, channels, WINOGRAD_TILE);
+    //auto sgemm_tuners =
+    //    t.load_sgemm_tuners(channels, WINOGRAD_P, channels, WINOGRAD_TILE);
+    // for QUALCOMM Adreno(TM),come from CLBlast
+    std::string sgemm_tuners = "-DKWG=32 -DKWI=2 -DMDIMA=8 -DMDIMC=8 -DMWG=32 -DNDIMB=8 -DNDIMC=8 -DNWG=32 -DSA=1 -DSB=1 -DSTRM=0 -DSTRN=0 -DVWM=4 -DVWN=1";
 
     // Exit immediately after tuning. Some NVIDIA drivers are buggy
     // and will fail to compile the rest of the kernels after a tuning
@@ -799,9 +801,9 @@ void OpenCL<net_t>::initialize(const int channels) {
     try {
         std::string args = m_cl_args;
         // Intel iGPUs need vector types for math for best performance
-        if (m_device.getInfo<CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT>() > 1) {
-            args += " -DWINOGRAD_SIMD";
-        }
+        //if (m_device.getInfo<CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT>() > 1) {
+        //    args += " -DWINOGRAD_SIMD";
+        //}
 
         args += sgemm_tuners;
         m_program.build(args.c_str());

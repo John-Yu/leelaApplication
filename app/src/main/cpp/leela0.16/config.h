@@ -52,7 +52,7 @@ static constexpr auto POTENTIAL_MOVES = NUM_INTERSECTIONS + 1; // including pass
  * Also used for OpenCL self-checks.
  */
 #define USE_BLAS
-#define USE_CPU_ONLY
+//#define USE_CPU_ONLY
 
 /*
  * We use OpenBLAS by default, except on macOS, which has a fast BLAS

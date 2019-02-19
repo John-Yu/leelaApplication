@@ -80,7 +80,7 @@ public:
         Default memory limit in bytes.
         ~1.3GiB on 32-bits and about 5.2GiB on 64-bits.
     */
-    //YUHZ
+
     static constexpr size_t DEFAULT_MAX_MEMORY =
         (sizeof(void*) == 4 ? 525'000'000 : 900'000'000);
 

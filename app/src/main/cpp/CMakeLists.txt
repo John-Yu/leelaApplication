@@ -3,8 +3,17 @@
 
 # Sets the minimum version of CMake required to build the native library.
 
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.6.0)
 
+#------------------libcl_stub-----------------------
+set(cl_stub_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(cl_stub_SRC "${cl_stub_DIR}/cl_stub-master")
+set(cl_stub_build_DIR ${PROJECT_BINARY_DIR}/cl_stub_outputs)
+file(MAKE_DIRECTORY ${cl_stub_build_DIR})
+add_subdirectory(${cl_stub_SRC} ${cl_stub_build_DIR})
+add_library(libcl_stub SHARED IMPORTED)
+set_target_properties(libcl_stub PROPERTIES IMPORTED_LOCATION ${cl_stub_build_DIR}/${ANDROID_ABI}/libcl_stub.so)
+include_directories( ${cl_stub_SRC}/include )
 #------------------boost -----------------------
 add_library (boost_program_options SHARED IMPORTED)
 set_target_properties( boost_program_options PROPERTIES IMPORTED_LOCATION
@@ -42,6 +51,7 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         boost_filesystem
         boost_program_options
+        libcl_stub
         lib_QML
         z)
 #-----------------------------------------

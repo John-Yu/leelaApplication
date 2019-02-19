@@ -28,6 +28,9 @@ int StopEngine() {
 int StartEngine(std::string weightfilename) {
     if(maingame == nullptr) {
         GTP::setup_default_parameters();
+        cfg_gtp_mode = true;
+        cfg_allow_pondering = false;
+        cfg_max_threads = 4;
         cfg_weightsfile = weightfilename;
         // Setup global objects after command line has been parsed
         thread_pool.initialize(cfg_num_threads);
