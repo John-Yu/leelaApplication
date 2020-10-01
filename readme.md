@@ -3,6 +3,7 @@
    It supports [Leela Zero](https://github.com/gcp/leela-zero), can do some test easily.
    It will create a SO lib, this lib can be used in [BlueGoAI](https://github.com/John-Yu/BluGo_Android).
    You can download BlueGoAI source code from  [GITHUB](https://github.com/John-Yu/BluGo_Android) 
+   this application is really amazing.
  
 
 # Related links
